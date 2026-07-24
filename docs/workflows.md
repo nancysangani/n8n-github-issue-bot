@@ -6,19 +6,24 @@ This workflow automates GitHub issue triage using AI and n8n.
 
 ## Current Workflow
 
-GitHub Issue Created
-        ↓
-GitHub Trigger
-        ↓
-Extract Issue Data
-        ↓
-Groq LLM Analysis
-        ↓
-Parse AI JSON Response
-        ↓
-Switch Node
-        ↓
-Automatically Add GitHub Label
+The AI-powered GitHub Issue Classifier follows this automated workflow:
+
+```text
+[GitHub Issue Created]
+          ↓
+[GitHub Trigger]
+          ↓
+[Extract Issue Data]
+          ↓
+[Groq LLM Analysis]
+          ↓
+[Parse AI JSON Response]
+          ↓
+[Switch Node]
+          ↓
+[Automatically Add GitHub Label]
+```
+![Workflow](images/github-bug-label.png)
 
 ---
 
@@ -90,7 +95,3 @@ Authentication issues automatically receive the `bug` label using the GitHub API
 ⬜ Notifications
 
 ⬜ Google Sheets Logging
-
-## Current Workflow
-
-![Workflow](images/github-bug-label.png)
