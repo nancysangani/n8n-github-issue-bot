@@ -4,11 +4,12 @@ An AI-powered GitHub issue triage system built using n8n.
 
 ## Features
 
-- GitHub issue detection
-- AI issue classification
-- Automatic labeling
-- AI generated comments
-- Auto assignment
+- AI-powered GitHub issue classification
+- Automatic GitHub label assignment
+- Groq LLM integration
+- Event-driven automation using n8n
+- Modular workflow design
+- Production-ready folder structure
 
 ## Tech Stack
 
@@ -16,3 +17,13 @@ An AI-powered GitHub issue triage system built using n8n.
 - Docker
 - GitHub API
 - OpenAI API
+
+## Current Progress
+
+- [x] GitHub webhook trigger
+- [x] AI issue analysis
+- [x] Automatic bug labeling
+- [ ] AI comments
+- [ ] Auto assignment
+- [ ] Discord notifications
+- [ ] Google Sheets integration
