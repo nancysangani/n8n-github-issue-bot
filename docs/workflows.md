@@ -90,3 +90,7 @@ Authentication issues automatically receive the `bug` label using the GitHub API
 ⬜ Notifications
 
 ⬜ Google Sheets Logging
+
+## Current Workflow
+
+![Workflow](images/github-bug-label.png)
