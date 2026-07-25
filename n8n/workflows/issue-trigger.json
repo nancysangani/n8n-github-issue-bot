@@ -1,16 +1,40 @@
 {
-  "name": "GitHub Issue Trigger",
-  "status": "implemented",
-  "description": "Listens for newly opened GitHub issues and starts the automation workflow.",
   "nodes": [
-    "GitHub Trigger",
-    "Edit Fields"
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/nancysangani",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-github-issue-bot",
+          "mode": "list",
+          "cachedResultName": "n8n-github-issue-bot",
+          "cachedResultUrl": "https://github.com/nancysangani/n8n-github-issue-bot"
+        },
+        "events": [
+          "issues"
+        ],
+        "options": {}
+      },
+      "id": "997a064c-b879-4f75-b316-dae7784ae0c9",
+      "name": "Github Trigger",
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        16
+      ]
+    }
   ],
-  "output": {
-    "title": "Issue title",
-    "description": "Issue body",
-    "repository": "Repository name",
-    "owner": "Repository owner",
-    "issue_number": "GitHub issue number"
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        []
+      ]
+    }
   }
 }
