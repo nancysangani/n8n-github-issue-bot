@@ -1,16 +1,47 @@
 {
-  "name": "AI Classifier",
-  "status": "implemented",
-  "provider": "Groq",
-  "model": "llama-3.3-70b-versatile",
-  "description": "Analyzes GitHub issues and classifies them using AI.",
-  "input": [
-    "Issue title",
-    "Issue description"
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ \n  model: \"llama-3.3-70b-versatile\", \n  messages: [{ \n    role: \"user\", \n    content: \n    \"Analyze this GitHub issue. \" +\n    \"Title: \" + $json.title + \n    \". Description: \" + $json.description + \n    \". Choose exactly one category from: Bug, Feature, Technical, Documentation, UI/UX, Performance, Security, Question. \" +\n    \"Choose priority from: Low, Medium, High, Critical. \" +\n    \"Return only JSON in this format: \" +\n    '{\"category\":\"\",\"priority\":\"\",\"comment\":\"\"}'\n  }] \n}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "b186e916-aa76-4da7-85ad-27ac397d3e6e",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        448,
+        0
+      ]
+    }
   ],
-  "output": {
-    "category": "Authentication",
-    "priority": "High",
-    "comment": "Investigate server-side issue causing login page crash after password reset"
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
   }
 }
