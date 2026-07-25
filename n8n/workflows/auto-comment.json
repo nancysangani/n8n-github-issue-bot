@@ -1,6 +1,37 @@
 {
-  "name": "Auto Comment",
-  "status": "implemented",
-  "description": "Posts an AI-generated analysis comment on every new GitHub issue.",
-  "template": "🤖 AI Issue Analysis\n\nCategory: {{category}}\nPriority: {{priority}}\n\nRecommendation:\n{{comment}}\n\nThank you for reporting this issue. The development team will review it shortly."
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "createComment",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json.owner }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $('Edit Fields').item.json.repository.split('/')[1] }}",
+          "mode": "name"
+        },
+        "issueNumber": "={{ $('Edit Fields').item.json.issue_number }}",
+        "body": "={{\n`🤖 AI Issue Analysis\n\nCategory: ${$('Code in JavaScript').item.json.category}\n\nPriority: ${$('Code in JavaScript').item.json.priority}\n\nRecommendation:\n${$('Code in JavaScript').item.json.comment}\n\nThank you for reporting this issue. The development team will review it shortly.`\n}}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1408,
+        -16
+      ],
+      "id": "ffa7b571-bb25-4dab-91dc-f4eb45941f7c",
+      "name": "Create a comment on an issue"
+    }
+  ],
+  "connections": {
+    "Create a comment on an issue": {
+      "main": [
+        []
+      ]
+    }
+  }
 }
