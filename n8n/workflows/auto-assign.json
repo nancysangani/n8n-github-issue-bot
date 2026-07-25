@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $node[\"Edit Fields\"].json.owner }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{$node[\"Edit Fields\"].json.repository.split(\"/\")[1]}}",
+          "mode": "name"
+        },
+        "issueNumber": "={{$node[\"Edit Fields\"].json.issue_number}}",
+        "editFields": {
+          "assignees": [
+            {
+              "assignee": "={{$node[\"Edit Fields\"].json.owner}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -16
+      ],
+      "id": "b01d8cc3-0f3d-4352-a6de-f94a82d26bfa",
+      "name": "Edit an issue"
+    }
+  ],
+  "connections": {}
+}
