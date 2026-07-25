@@ -1,0 +1,6 @@
+{
+  "name": "Auto Comment",
+  "status": "implemented",
+  "description": "Posts an AI-generated analysis comment on every new GitHub issue.",
+  "template": "🤖 AI Issue Analysis\n\nCategory: {{category}}\nPriority: {{priority}}\n\nRecommendation:\n{{comment}}\n\nThank you for reporting this issue. The development team will review it shortly."
+}
