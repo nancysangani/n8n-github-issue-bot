@@ -1,97 +1,211 @@
-# GitHub Issue AI Automation Workflow
+# 🔄 Workflow Documentation
 
-## Overview
+This document explains the complete AI GitHub Issue Triage workflow.
 
-This workflow automates GitHub issue triage using AI and n8n.
+---
 
-## Current Workflow
+# Workflow Overview
 
-The AI-powered GitHub Issue Classifier follows this automated workflow:
-
-```text
-[GitHub Issue Created]
-          ↓
-[GitHub Trigger]
-          ↓
-[Extract Issue Data]
-          ↓
-[Groq LLM Analysis]
-          ↓
-[Parse AI JSON Response]
-          ↓
-[Switch Node]
-          ↓
-[Automatically Add GitHub Label]
 ```
-![Workflow](images/github-bug-label.png)
+GitHub Issue Created
+          |
+          ↓
+GitHub Webhook Trigger
+          |
+          ↓
+Extract Issue Information
+          |
+          ↓
+Groq AI Classification
+          |
+          ↓
+Parse AI Response
+          |
+          ↓
+Category Routing
+          |
+          ↓
+GitHub Automation Actions
+```
 
 ---
 
-## Implemented Features
+# 1. GitHub Trigger
 
-### 1. GitHub Trigger
+## Purpose
 
-- Listens for newly created GitHub issues.
-- Receives webhook payload automatically.
+Receives GitHub issue events through webhook integration.
 
----
+Triggered when:
 
-### 2. Issue Data Extraction
+```
+issues.opened
+```
 
-Extracts:
-
-- Issue title
-- Issue description
-- Repository name
-- Repository owner
-- Issue number
-
----
-
-### 3. AI Classification
-
-The issue is sent to the Groq API using the Llama 3.3 70B Versatile model.
-
-Example output:
+Payload contains:
 
 ```json
 {
-  "category": "Authentication",
-  "priority": "High",
-  "comment": "Investigate server-side issue causing login page crash after password reset"
+"title":"",
+"body":"",
+"issue_number":"",
+"repository":""
 }
 ```
 
 ---
 
-### 4. Routing
+# 2. Edit Fields Node
 
-A Switch node routes issues based on the AI category.
+## Purpose
 
-Current implemented route:
+Extracts required information from GitHub payload.
 
-Authentication → Bug
+Extracted fields:
+
+```json
+{
+"title":"",
+"body":"",
+"issue_number":"",
+"owner":"",
+"repository":""
+}
+```
+
+This simplifies downstream workflow processing.
 
 ---
 
-### 5. Automatic Labeling
+# 3. Groq AI Classification
 
-Authentication issues automatically receive the `bug` label using the GitHub API.
+## Purpose
+
+Uses LLM-based analysis to classify issues.
+
+Input:
+
+```
+Issue title
+Issue description
+```
+
+Output:
+
+```json
+{
+"category":"Bug",
+"priority":"High",
+"comment":"Investigate backend failure."
+}
+```
+
+Supported categories:
+
+- Bug
+- Feature
+- Technical
+- Documentation
+- UI/UX
+- Performance
+- Security
+- Question
 
 ---
 
-## Current Status
+# 4. Switch Node
 
-✅ GitHub Trigger
+## Purpose
 
-✅ AI Classification
+Routes issues based on AI category.
 
-✅ Automatic Bug Labeling
+Example:
 
-⬜ AI Comments
+```
+Bug
+ ↓
+Bug Label Node
+```
 
-⬜ Auto Assignment
+```
+Feature
+ ↓
+Feature Label Node
+```
 
-⬜ Notifications
+This enables category-specific automation.
 
-⬜ Google Sheets Logging
+---
+
+# 5. Label Assignment
+
+## Purpose
+
+Automatically applies GitHub labels.
+
+Example:
+
+AI Output:
+
+```
+Category: Bug
+```
+
+Result:
+
+```
+GitHub Label:
+bug
+```
+
+---
+
+# 6. AI Comment Generation
+
+The workflow posts an AI-generated analysis.
+
+Example:
+
+```
+AI Issue Analysis
+
+Category:
+Authentication
+
+Priority:
+High
+
+Recommendation:
+Investigate server-side login failure.
+```
+
+---
+
+# 7. Automatic Assignment
+
+The workflow assigns issues dynamically.
+
+Current strategy:
+
+```
+Repository Owner
+        ↓
+GitHub Assignee
+```
+
+Expression:
+
+```javascript
+{{$node["Edit Fields"].json.owner}}
+```
+
+---
+
+# Future Workflow Improvements
+
+Planned:
+
+- Multiple AI-generated labels
+- Team-based assignment
+- Issue analytics
+- Notification systems
