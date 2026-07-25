@@ -1,0 +1,17 @@
+{
+  "name": "Auto Label",
+  "status": "implemented",
+  "description": "Applies GitHub labels based on AI classification.",
+  "current_rules": [
+    {
+      "category": "Bug",
+      "label": "bug"
+    }
+  ],
+  "next_phase": [
+    "authentication",
+    "high-priority",
+    "documentation",
+    "enhancement"
+  ]
+}
