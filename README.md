@@ -272,10 +272,8 @@ Repository owner
 
 # 📸 Workflow Preview
 
-(Add your n8n workflow screenshot here)
-
 ```
-images/workflow.png
+docs/images/workflow.png
 ```
 
 ---
