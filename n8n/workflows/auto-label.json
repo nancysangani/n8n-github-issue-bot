@@ -1,17 +1,44 @@
 {
-  "name": "Auto Label",
-  "status": "implemented",
-  "description": "Applies GitHub labels based on AI classification.",
-  "current_rules": [
+  "description": "Example label workflow for Bug category. This node adds the 'bug' label when AI classifies an issue as Bug.",
+  "nodes": [
     {
-      "category": "Bug",
-      "label": "bug"
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "={{$('Edit Fields').item.json.owner}}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{$('Edit Fields').item.json.repository.split('/')[1]}}",
+          "mode": "name"
+        },
+        "issueNumber": "={{$('Edit Fields').item.json.issue_number}}",
+        "editFields": {
+          "labels": [
+            {
+              "label": "bug"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        -720
+      ],
+      "id": "9545b1ac-9a38-48a4-95c9-94b1077c5ff7",
+      "name": "Bug"
     }
   ],
-  "next_phase": [
-    "authentication",
-    "high-priority",
-    "documentation",
-    "enhancement"
-  ]
+  "connections": {
+    "Bug": {
+      "main": [
+        []
+      ]
+    }
+  }
 }
