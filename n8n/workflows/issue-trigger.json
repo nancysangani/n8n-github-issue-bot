@@ -1,0 +1,16 @@
+{
+  "name": "GitHub Issue Trigger",
+  "status": "implemented",
+  "description": "Listens for newly opened GitHub issues and starts the automation workflow.",
+  "nodes": [
+    "GitHub Trigger",
+    "Edit Fields"
+  ],
+  "output": {
+    "title": "Issue title",
+    "description": "Issue body",
+    "repository": "Repository name",
+    "owner": "Repository owner",
+    "issue_number": "GitHub issue number"
+  }
+}
