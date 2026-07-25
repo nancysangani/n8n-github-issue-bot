@@ -272,10 +272,7 @@ Repository owner
 
 # 📸 Workflow Preview
 
-```
-docs/images/workflow.png
-```
-
+![AI GitHub Issue Automation Workflow](docs/images/workflow.png)
 ---
 
 # 🚀 Setup
