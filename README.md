@@ -298,7 +298,7 @@ When a new GitHub issue is created:
 
 # 📸 Workflow Preview
 
-![AI GitHub Issue Automation Workflow](docs/images/workflow.png)
+![AI GitHub Issue Automation Workflow](docs/images/workflow-multiple-labels.png)
 ---
 
 # 🚀 Setup
