@@ -7,43 +7,29 @@ The project implements an event-driven AI automation architecture using n8n.
 # High-Level Architecture
 
 ```
-              GitHub Repository
-
-                    |
-                    |
-             Issue Created Event
-
-                    |
-                    ↓
-
-             GitHub Webhook
-
-                    |
-                    ↓
-
-              n8n Workflow Engine
-
-                    |
-                    ↓
-
-             Groq LLM Analysis
-
-                    |
-                    ↓
-
-          AI Decision & Classification
-
-                    |
-          ---------------------
-          |        |          |
-          ↓        ↓          ↓
-
-       Labels   Comments   Assignment
-
-                    |
-                    ↓
-
-             Updated GitHub Issue
+GitHub Issue Created
+          |
+          ↓
+GitHub Webhook
+          |
+          ↓
+n8n Workflow
+          |
+          ↓
+Groq AI Classifier
+          |
+          ↓
+Issue Analysis
+          |
+          ├── AI Label Generation
+          |
+          ├── Dynamic Label Creation
+          |
+          ├── Multiple Label Assignment
+          |
+          ├── AI Comment
+          |
+          └── Auto Assignment
 ```
 
 ---

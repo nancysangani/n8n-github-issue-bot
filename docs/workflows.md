@@ -94,9 +94,14 @@ Output:
 
 ```json
 {
-"category":"Bug",
-"priority":"High",
-"comment":"Investigate backend failure."
+  "category": "Bug",
+  "priority": "High",
+  "labels": [
+    "bug",
+    "backend",
+    "api"
+  ],
+  "comment": "Investigate backend failure."
 }
 ```
 
@@ -137,26 +142,48 @@ This enables category-specific automation.
 
 ---
 
-# 5. Label Assignment
+# 5. Intelligent Label Management
 
-## Purpose
+The label automation workflow performs the following steps:
 
-Automatically applies GitHub labels.
+1. AI generates multiple labels for the issue.
+2. Existing repository labels are retrieved from GitHub.
+3. Missing labels are identified.
+4. Missing labels are automatically created.
+5. Custom colors and descriptions are assigned to newly created labels.
+6. All generated labels are applied to the GitHub issue.
+7. The workflow continues with AI comment generation and automatic assignment.
 
-Example:
+---
 
-AI Output:
+## Workflow Flow
 
 ```
-Category: Bug
+GitHub Issue
+      ↓
+Groq AI Analysis
+      ↓
+Generate Category, Priority & Labels
+      ↓
+Retrieve Existing Repository Labels
+      ↓
+Identify Missing Labels
+      ↓
+Create Missing Labels (if required)
+      ↓
+Apply Multiple Labels
+      ↓
+Generate AI Comment
+      ↓
+Assign Issue
 ```
 
-Result:
+### Key Capabilities
 
-```
-GitHub Label:
-bug
-```
+- Supports multiple AI-generated labels.
+- Automatically creates repository labels when they do not exist.
+- Assigns predefined colors and descriptions to newly created labels.
+- Prevents duplicate label creation by checking existing repository labels.
 
 ---
 
@@ -203,9 +230,26 @@ Expression:
 
 # Future Workflow Improvements
 
-Planned:
+Planned enhancements:
 
-- Multiple AI-generated labels
-- Team-based assignment
-- Issue analytics
-- Notification systems
+- Smarter AI prioritization with confidence scores
+- Team-based assignment strategies
+- Discord / Slack notifications
+- Google Sheets issue analytics
+- Production logging and monitoring
+- Duplicate issue detection
+- Suggested fixes and root-cause analysis
+
+---
+
+# Workflow Summary
+
+The workflow provides an end-to-end AI-powered GitHub issue management pipeline by:
+
+- Receiving issue events through GitHub Webhooks.
+- Analyzing issue content using Groq LLM.
+- Generating category, priority, and multiple labels.
+- Automatically creating missing repository labels.
+- Applying labels, posting AI-generated comments, and assigning issues to maintainers.
+
+This modular architecture enables scalable, event-driven issue triage with minimal manual intervention.
