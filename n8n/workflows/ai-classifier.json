@@ -17,22 +17,14 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ \n  model: \"llama-3.3-70b-versatile\", \n  messages: [{ \n    role: \"user\", \n    content: \n    \"Analyze this GitHub issue. \" +\n    \"Title: \" + $json.title + \n    \". Description: \" + $json.description + \n    \". Choose exactly one category from: Bug, Feature, Technical, Documentation, UI/UX, Performance, Security, Question. \" +\n    \"Choose priority from: Low, Medium, High, Critical. \" +\n    \"Return only JSON in this format: \" +\n    '{\"category\":\"\",\"priority\":\"\",\"comment\":\"\"}'\n  }] \n}) }}",
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true,
-              "responseFormat": "json"
-            }
-          }
-        }
+        "jsonBody": "={{ JSON.stringify({\n  model: \"llama-3.3-70b-versatile\",\n  messages: [{\n    role: \"user\",\n    content:\n    \"You are an AI GitHub Issue Triage Assistant. \" +\n    \"Analyze the following GitHub issue and provide a structured assessment. \" +\n    \"Title: \" + $json.title + \". \" +\n    \"Description: \" + $json.description + \". \" +\n    \"Choose EXACTLY ONE category from the following: Bug, Feature, Technical, Documentation, UI/UX, Performance, Security, Question, Needs-Review. \" +\n    \"Choose EXACTLY ONE priority from: Low, Medium, High, Critical. \" +\n    \"Choose EXACTLY ONE severity from: Low, Medium, High, Critical. \" +\n    \"Provide a confidence score between 0 and 100. \" +\n    \"Generate up to 4 GitHub labels using ONLY allowed labels. \" +\n    \"Return ONLY valid JSON.\"\n  }]\n}) }}"
       },
-      "id": "b186e916-aa76-4da7-85ad-27ac397d3e6e",
+      "id": "616691e4-6731-4e3e-b7f1-dd119fa434c6",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        448,
+        672,
         0
       ]
     }
