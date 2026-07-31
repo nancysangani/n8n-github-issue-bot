@@ -7,7 +7,7 @@
 
 An AI-powered GitHub issue triage and automation system built using **n8n workflows** and **Groq LLM**.
 
-The system automatically analyzes newly created GitHub issues, classifies them using AI, applies relevant labels, generates helpful comments, and assigns issues to maintainers — reducing manual issue management effort.
+The system automatically analyzes newly created GitHub issues, classifies them using AI, applies relevant labels, generates helpful comments, and intelligently decides whether issues should be automatically assigned or reviewed manually based on AI confidence.
 
 ---
 
@@ -21,6 +21,10 @@ The AI automatically determines:
 - Priority level
 - Multiple relevant labels
 - AI-generated recommendation
+- Severity level
+- Confidence score
+- Affected component
+- Suggested team
 
 Supported categories include:
 
@@ -78,6 +82,24 @@ The assignee is dynamically fetched from the repository owner information, makin
 
 The complete pipeline runs automatically whenever a new GitHub issue is created using GitHub Webhooks.
 
+## ✅ Confidence-Based Automation
+
+The AI confidence score controls the level of automation.
+
+- High confidence (≥90%)
+  - Automatically labels the issue
+  - Generates AI analysis
+  - Assigns the issue
+
+- Medium confidence (70-89%)
+  - Labels the issue
+  - Generates AI analysis
+  - Requires manual assignment
+
+- Low confidence (<70%)
+  - Adds needs-review label
+  - Requires human review
+
 
 ---
 
@@ -114,7 +136,16 @@ Apply Multiple Labels
 Generate AI Comment
           │
           ▼
-Assign Issue
+Confidence Evaluation
+          │
+     ┌────┼────┐
+     │    │    │
+     ▼    ▼    ▼
+   ≥90  70-89  <70
+     │    │      │
+     ▼    ▼      ▼
+ Auto  Manual  Add
+Assign Review needs-review
 ```
 
 ---
@@ -171,6 +202,7 @@ ai-github-issue-automation/
 | Groq AI | Classifies issues using LLM |
 | Code Parser | Parses AI response |
 | Label Manager | Generates, creates, and applies labels |
+| Confidence Router | Controls automation based on confidence score |
 | GitHub Comment Node | Posts AI analysis |
 | GitHub Assign Node | Assigns repository owner |
 
@@ -190,17 +222,24 @@ ai-github-issue-automation/
 - [x] Dynamic GitHub label creation
 - [x] Automatic label colors
 - [x] Automatic label descriptions
-- [x] AI generated comments
+- [x] AI-generated comments
 - [x] Automatic issue assignment
+- [x] AI confidence scoring
+- [x] Confidence-based automation routing
+- [x] Low confidence review workflow
+- [x] `needs-review` label automation
 
 
-## Upcoming
+## 🚀 Upcoming
 
-- [ ] Smarter AI classification
-- [ ] Discord notifications
-- [ ] Google Sheets integration
-- [ ] Production logging
-- [ ] Error monitoring
+- [ ] AI-powered duplicate issue detection
+- [ ] AI suggested fixes and code recommendations
+- [ ] Multi-agent issue analysis workflow
+- [ ] Team-based automatic assignment
+- [ ] Discord / Slack notifications
+- [ ] Google Sheets or database issue analytics
+- [ ] Production logging and monitoring
+- [ ] AI classification feedback loop for continuous improvement
 
 
 ---
@@ -222,6 +261,7 @@ ai-github-issue-automation/
 - Supports custom label:
   - Colors
   - Descriptions
+  - Automatic review labels for low-confidence issues
 
 ### 💬 Automated Issue Communication
 - Generates AI-powered comments
@@ -231,7 +271,7 @@ ai-github-issue-automation/
 - Assigns issues automatically to maintainers
 
 ### 🔄 Event Driven Automation
-- GitHub webhook based workflow
+- GitHub webhook-based workflow
 - Real-time issue processing through n8n
 
 
@@ -254,14 +294,20 @@ AI Output:
 
 ```json
 {
-  "category":"Bug",
-  "priority":"High",
-  "labels":[
-      "bug",
-      "backend",
-      "api"
+  "category": "Bug",
+  "priority": "High",
+  "severity": "High",
+  "confidence": 92,
+  "labels": [
+    "bug",
+    "backend",
+    "api"
   ],
-  "comment":"..."
+  "affectedComponent": "Authentication Service",
+  "estimatedComplexity": "Medium",
+  "suggestedTeam": "Backend",
+  "comment": "...",
+  "reasoning": "..."
 }
 ```
 
@@ -292,7 +338,7 @@ When a new GitHub issue is created:
 4. Missing labels are created automatically.
 5. Labels are applied to the issue.
 6. An AI-generated comment is posted.
-7. The issue is automatically assigned to the maintainer.
+7. Based on AI confidence, the workflow either assigns the issue automatically or marks it for manual review.
 
 ---
 
